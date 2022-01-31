@@ -1,11 +1,10 @@
 # BranchPredictionTest
-Testing branch prediction processor feature
-
-Results:
+Testing branch prediction processor feature results:
 
 Unpredictable:
 10.8368ms
 -------------------------
+
 Predictable:
 4.2304ms
 
