@@ -57,7 +57,7 @@ int main()
     std::cout << "-------------------------\n";
     std::cout << "Predictable when count:\n";
     t1 = high_resolution_clock::now();
-    unpredictable(vec);
+    predictable(vec);
     t2 = high_resolution_clock::now();
     delay = t2 - t1;
 
