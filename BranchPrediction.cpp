@@ -20,7 +20,16 @@ int main()
 	std::sort(vec->begin(), vec->end());
 	showFunctionDuration(CPU_estimate_predictable_condition, *vec);
 
+<<<<<<< HEAD
 	
+=======
+    std::cout << "-------------------------\n";
+    std::cout << "Predictable when count:\n";
+    t1 = high_resolution_clock::now();
+    predictable(vec);
+    t2 = high_resolution_clock::now();
+    delay = t2 - t1;
+>>>>>>> 64d9e8e62b3f077a28c34bc84d7686291c4885ac
 
 	
 
