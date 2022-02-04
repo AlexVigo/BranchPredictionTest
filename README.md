@@ -1,6 +1,6 @@
 # BranchPredictionTest
 Testing CPU branch prediction and parallel execution processor feature:
-
+----------------------------------------------------
 Execution time of __CPU_cant_parallel_terations__: 48.4708ms
 Execution time of __CPU_parallel_terations__: 28.9461ms
 ----------------------------------------------------
