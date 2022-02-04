@@ -1,11 +1,11 @@
 # BranchPredictionTest
-Testing branch prediction processor feature results:
+Testing CPU branch prediction and parallel execution processor feature:
 
-Unpredictable:
-10.8368ms
-
-Predictable:
-4.2304ms
+Execution time of __CPU_cant_parallel_terations__: 48.4708ms
+Execution time of __CPU_parallel_terations__: 28.9461ms
+----------------------------------------------------
+Execution time of __CPU_estimate_UNpredictable_condition__: 3081.73ms
+Execution time of __CPU_estimate_predictable_condition__: 2996.96ms
 
 Discription:
 
