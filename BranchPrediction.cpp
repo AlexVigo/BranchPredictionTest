@@ -1,68 +1,31 @@
 ﻿#include <iostream>
-#include <chrono>
-#include <random>
-#include <algorithm>
+#include <vector>
 
-using std::chrono::high_resolution_clock;
-using std::chrono::duration_cast;
-using std::chrono::duration;
-using std::chrono::milliseconds;
-
-static std::vector<int> generate_data(size_t size)
-{
-    using value_type = int;
-    static std::uniform_int_distribution<value_type> distribution(
-        std::numeric_limits<value_type>::min(),
-        std::numeric_limits<value_type>::max());
-    static std::default_random_engine generator;
-
-    std::vector<value_type> data(size);
-    std::generate(data.begin(), data.end(), []() { return distribution(generator); });
-    return data;
-}
-
-void unpredictable(std::vector<int>& a_vector)
-{
-    int vec_size = static_cast<int>(a_vector.size());
-	if(std::count_if(a_vector.begin(), a_vector.end(),
-			[&vec_size](int const elem) { return elem >= vec_size; }) > vec_size % 2)
-	{
-        std::sort(a_vector.begin(), a_vector.end());
-	}
-}
-
-void predictable(std::vector<int>& a_vector)
-{
-    int vec_size = static_cast<int>(a_vector.size());
-    if (std::count_if(a_vector.begin(), a_vector.end(),
-        [&vec_size](int const elem) { return elem >= vec_size; }) > 0)
-    {
-        std::sort(a_vector.begin(), a_vector.end());
-    }
-}
+#include "DurationEstimator.h"
+#include "SequenceGenerator.h"
+#include "TestCPUParallelIterations.h"
+#include "TestCPUPredictCondition.h"
 
 int main()
 {
-    std::vector<int> vec = generate_data(10000);
+	constexpr size_t vec_size = 100000;
+	std::vector<int>* vec = generate_data<int>(vec_size);
 
-	auto t1 = high_resolution_clock::now();
-    unpredictable(vec);
-    auto t2 = high_resolution_clock::now();
+	showFunctionDuration(CPU_cant_parallel_terations, *vec);
+	showFunctionDuration(CPU_parallel_terations, *vec);
 
-    duration<double, std::milli> delay = t2 - t1;
+	std::cout << "----------------------------------------------------\n";
 
-    std::cout << "Unpredictable when count:\n";
-    std::cout << delay.count() << "ms\n";
+	showFunctionDuration(CPU_estimate_UNpredictable_condition, *vec);
+	std::sort(vec->begin(), vec->end());
+	showFunctionDuration(CPU_estimate_predictable_condition, *vec);
 
-    std::cout << "-------------------------\n";
-    std::cout << "Predictable when count:\n";
-    t1 = high_resolution_clock::now();
-    unpredictable(vec);
-    t2 = high_resolution_clock::now();
-    delay = t2 - t1;
+	
 
-    std::cout << delay.count() << "ms\n";
+	
 
+	std::cout << std::flush;
+	delete vec;
     system("pause");
     return 0;
 }
