@@ -4,14 +4,12 @@
 #include <random>
 
 template <typename T>
-inline std::vector<T>* generate_data(size_t size)
+void generate_data(std::vector<T> &a_vector)
 {
-	std::vector<T>* data = new std::vector<T>(size);
 	std::uniform_int_distribution<T> distribution(
 		(std::numeric_limits<T>::min()),
 		(std::numeric_limits<T>::max()));
 	std::default_random_engine generator;
 
-	std::generate(data->begin(), data->end(), [&]() { return distribution(generator); });
-	return data;
+	std::generate(a_vector.begin(), a_vector.end(), [&]() { return distribution(generator); });
 }

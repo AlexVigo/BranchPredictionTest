@@ -18,5 +18,5 @@ void showFunctionDuration(std::string(*afunc)(std::vector<T>&), std::vector<T>& 
 
     const duration<double, std::milli> delay = t2 - t1;
 
-    std::cout << "Execution time of __" << func_name << "__: " << delay.count() << "ms\n";
+    std::cout << "Execution time of __" << func_name << "__: " << delay.count() << "ms" << std::endl;
 }
